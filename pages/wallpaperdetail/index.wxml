@@ -1,0 +1,61 @@
+<!--pages/wallpaperdetail/index.wxml-->
+
+
+<swiper  duration="500"  current='{{current}}' style="height:{{wHeight}}px" bindchange="slide">
+  <block wx:for="{{wallpagerlist}}" >
+    <swiper-item >
+      <view class="preview_wap" >
+          <image src="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/wallpaper/{{item.bigpic}}" class="bigpic" bindtap="preview_pic"></image>
+          <view class="des_pic fs24">
+              <view class="tabitem firstChlid" >
+                  <image src="../../images/eye_icon.png"></image>
+                  <text>{{item.pre_num}}</text>浏览
+              </view>
+              <view class="tabitem" bindtap="download_pic"  data-pic="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/wallpaper/{{item.bigpic}}">
+                  <image src="../../images/download_icon.png"></image>
+                  <text>{{item.down_num}}</text>下载
+              </view>
+              <view class="tabitem" bindtap="likebtn_pic" data-like='p_{{islike}}' wx:if="{{isclickLike}}">
+                  <image src="{{islike?'../../images/heart_s_icon.png':'../../images/heart_icon.png'}}"></image>
+                  <text>{{like_num}}</text>喜欢
+              </view>
+              <view class="tabitem" bindtap="likebtn_pic" data-like='p_{{item.islike}}' wx:else>
+                  <image src="{{item.islike?'../../images/heart_s_icon.png':'../../images/heart_icon.png'}}"></image>
+                  <text>{{item.like_num}}</text>喜欢
+              </view>
+
+
+          </view>
+      </view>
+      <view class="preview_pwap {{hide}}" style="height:{{wHeightM}}px" bindtap="hide_pic">
+          <image src="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/wallpaper/{{item.bigpic}}" class="wallpaper"></image>
+          <image src="../../images/jiemian.png" class="mask"></image>
+
+      </view>
+    </swiper-item>
+  </block>
+</swiper>
+
+<!--
+<view class="preview_wap" >
+    <image src="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/wallpaper/{{bigpic}}" class="bigpic" bindtap="preview_pic"></image>
+    <view class="des_pic fs24">
+        <view class="tabitem firstChlid" >
+            <image src="../../images/eye_icon.png"></image>
+            <text>{{pre_num}}</text>浏览
+        </view>
+        <view class="tabitem" bindtap="download_pic"  data-pic="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/wallpaper/{{bigpic}}">
+            <image src="../../images/download_icon.png"></image>
+            <text>{{down_num}}</text>下载
+        </view>
+        <view class="tabitem" bindtap="likebtn_pic" data-like='p_{{islike}}'>
+            <image src="{{islike?'../../images/heart_s_icon.png':'../../images/heart_icon.png'}}"></image>
+            <text>{{like_num}}</text>喜欢
+        </view>
+    </view>
+</view>
+<view class="preview_pwap {{hide}}" style="height:{{wHeight}}px" bindtap="hide_pic">
+    <image src="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/wallpaper/{{bigpic}}" class="wallpaper"></image>
+    <image src="../../images/jiemian.png" class="mask"></image>
+
+</view>-->

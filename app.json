@@ -1,0 +1,43 @@
+{
+  "pages":[
+        
+            
+    "pages/wallpaper/index",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/wallpaperdetail/index",
+    "pages/mypaper/index",
+    "pages/category/index"
+
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#000000",
+    "navigationBarTitleText": "日历",
+    "navigationBarTextStyle":"#fff",
+    "enablePullDownRefresh":false
+
+  },
+  "tabBar": {
+    "color": "#b7b7b7",
+    "selectedColor": "#000000",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "iconPath": "images/cd_icon.png",
+      "selectedIconPath": "images/cds_icon.png",
+      "text": "日历"
+    }, {
+      "pagePath": "pages/wallpaper/index",
+      "iconPath": "images/wp_icon.png",
+      "selectedIconPath": "images/wps_icon.png",
+      "text": "壁纸"
+    }, {
+      "pagePath": "pages/mypaper/index",
+      "iconPath": "images/my_icon.png",
+      "selectedIconPath": "images/mys_icon.png",
+      "text": "我的"
+    }]
+  }
+}

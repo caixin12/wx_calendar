@@ -1,0 +1,46 @@
+<!--pages/mypaper/index.wxml-->
+<view class="logo_con">
+    <image src="../../images/my_bg.png" class="logo_bg"></image>
+    <view class="userinfo">
+        <image src="{{logo}}" class="logopic"></image>
+        <view class="nick">{{nickName}}</view>
+    </view>
+    <view class="set" bindtap="opentk"><image src="../../images/set.png"></image></view>
+</view>
+
+<view class="tablist fs36">
+    <view class="tabitem {{type=='pre'?'active':''}}" bindtap="bindTab" data-key="pre">
+        <view class="num">{{pre_num}}</view>
+        浏览
+    </view>
+    <view class="tabitem {{type=='like'?'active':''}}" bindtap="bindTab" data-key="like">
+        <view class="num">{{like_num}}</view>
+        喜欢
+    </view>
+</view>
+
+<view class="wallpagerlist {{hide}}">
+
+    <view class="empty" wx:if="{{!wallpagerlist}}">空空如也~</view>
+    <view class="wallpager_item" wx:for="{{wallpagerlist}}"  >
+      <image src="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/wallpaper/{{item.pic}}" data-key="{{item.key}}" bindtap="binkDetailpic"></image>
+
+      <view class="like_w" wx:if="{{type=='like'}}" bindtap="cancellike" data-key="{{item.key}}">
+        <image src="../../images/wbottom.png" class="link_bg"></image>
+        <view class="like fs20">
+          <text class="likeNum">取消喜欢</text>
+        </view>
+        
+      </view>
+    </view>
+
+</view>
+
+<view class="mask " wx:if="{{isshowmask}}" bindtap="closetk">
+  <view class="tankuang">
+    <view class="item" bindtap="clearjl">清空浏览记录</view>
+    <view class="item" bindtap="closetk">取消</view>
+  </view>
+</view>
+
+   <!-- <contact-button  type="default-light" size="24" session-from="weapp" class="contact"></contact-button>-->

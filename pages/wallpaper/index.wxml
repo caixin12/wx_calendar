@@ -1,0 +1,42 @@
+<!--pages/wallpaper/index.wxml-->
+<view class="category " bindtap='bindMenu'>
+  <image src="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/category/category.png"></image>
+</view>
+<view class="categoryList {{menu_zt=='open'?'active':''}}">
+  <view class="categoryItem" data-category="人物" bindtap="bindCTab">
+    <image src="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/category/category_pic_01.png"></image>
+    <text>人物</text>
+  </view>
+  <view class="categoryItem" data-category="运动" bindtap="bindCTab">
+    <image src="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/category/category_pic_02.png"></image>
+    <text>运动</text>
+  </view>
+  <view class="categoryItem" data-category="插画" bindtap="bindCTab">
+    <image src="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/category/category_pic_03.png"></image>
+    <text>插画</text>
+  </view>
+  <view class="categoryItem" data-category="灰度" bindtap="bindCTab">
+    <image src="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/category/category_pic_04.png"></image>
+    <text>灰度</text>
+  </view>
+</view>
+
+<view class="tablist fs36">
+    <view class="tabitem {{type=='new'?'active':''}}" bindtap="bindTab" data-key="new">最新</view>
+    <view class="tabitem {{type=='hot'?'active':''}}" bindtap="bindTab" data-key="hot">最热</view>
+    <view class="tabitem {{type=='random'?'active':''}}" bindtap="bindTab" data-key="random">随机</view>
+</view>
+<view class="wallpagerlist {{hide}}">
+    <view class="wallpager_item" wx:for="{{wallpagerlist}}" data-key="{{item.key}}" bindtap="binkDetailpic">
+      <image src="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/wallpaper/{{item.pic}}"></image>
+
+      <view class="like_w" wx:if="{{type=='hot'}}">
+        <image src="../../images/wbottom.png" class="link_bg"></image>
+        <view class="like fs20">
+          
+          <text class="likeNum">{{item.pre_num}}人预览</text>
+        </view>
+      </view>
+    </view>
+</view>
+

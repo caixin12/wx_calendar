@@ -1,0 +1,15 @@
+<!--pages/category/index.wxml-->
+
+<view class="wallpagerlist {{hide}}">
+    <view class="wallpager_item" wx:for="{{wallpagerlist}}" data-key="{{item.key}}" bindtap="binkDetailpic">
+      <image src="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/wallpaper/{{item.pic}}"></image>
+
+      <view class="like_w" wx:if="{{type=='hot'}}">
+        <image src="../../images/wbottom.png" class="link_bg"></image>
+        <view class="like fs20">
+          <image src="../../images/heart.png" class="hearticon"></image>
+          <text class="likeNum">{{item.like_num}}人喜欢</text>
+        </view>
+      </view>
+    </view>
+</view>

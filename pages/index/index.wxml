@@ -1,0 +1,97 @@
+{{nickName}}
+
+<view class="flex box box-tb box-pack-center box-align-center" >
+  <view class="calendar  box box-tb">
+        <view class="top-handle fs38  box box-lr box-align-center box-pack-center">
+            
+            <view class="prev  box box-lr box-align-center box-pack-center" bindtap="handleCalendar" data-handle="prev">
+                <view class="prev-handle box box-lr box-align-center box-pack-center"> {{leftjian}} </view>
+            </view>
+            <view class="date-area box box-lr box-align-center box-pack-center">
+                <picker mode="date" value="{{cur_year}}" bindchange="bindYearChange" fields="year" start="1900" end="2100">
+                    <view class="picker">
+                       {{cur_year || "--"}}年 
+                    </view>
+                </picker>
+                <picker value="{{cur_month-1}}" bindchange="bindMonthChange" range="{{monthArr}}">
+                    <view class="picker">
+                       {{(cur_month<10)? '0'+cur_month:cur_month || "--"}}月
+                    </view>
+                </picker>
+            </view>
+            <view class="next box box-lr box-align-center box-pack-center" bindtap="handleCalendar" data-handle="next">
+                <view class="next-handle box box-lr box-align-center box-pack-center">{{rightjian}}</view>
+            </view>
+            <view class="backtoday fs24"  bindtap="handleBacktoday">今</view>
+            
+        </view>
+        <view class="today_date  fs24  box box-lr box-align-center box-pack-center">
+              <view class="Idate">{{gzYear}}{{Animal}}年 {{IMonthCn}}{{IDayCn}}</view>
+             
+            </view>
+        <view class="weeks box box-lr box-pack-center box-align-center">
+            <view class="flex week fs24 {{(index) %7 == 6 ||  (index) %7 == 0 ? 'weekend' : ''}}" wx:for="{{weeks_ch}}" wx:key="{{index}}" data-idx="{{index}}">{{item}}</view>
+        </view>
+        
+        <view class="days box box-lr box-wrap">
+            <view wx:if="{{hasEmptyGrid}}" class="day  box box-align-center box-pack-center" wx:for="{{empytGrids}}" wx:key="{{index}}" data-idx="{{index}}">
+            </view>
+            <view class="day {{(index+empytGrids.length) %7 == 6 ||  (index+empytGrids.length) %7 == 0 ? 'weekend' : ''}} {{isToday}} {{item.isToday ? 'today' : ''}} {{selected==item.cDay?'selected':''}}  {{selected!=item.cDay?'none':''}} box box-align-center box-pack-center" wx:for="{{days}}" wx:key="{{index}}" data-idx="{{index}}" bindtap='bindSelectDay' >
+                <view class="daynumber fs32">{{item.cDay}}</view>
+                <view class="almanac fs20 {{item.isFestival?'isFestival':''}}">{{item.IDayCn}}</view>
+                <view class="holiday-sign {{item.solarFestivalBX=='休'?'':'work'}}" wx:if="{{item.solarFestivalBX}}">{{item.solarFestivalBX}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class="weather {{weather_hide}}">
+  <view class="close" bindtap='handleCloseweather'>x</view>
+  <view class="w_htitle fs36">今日天气 <image src="../../images/location_icon.png" class="location_icon"></image> <text class="city fs24">{{city}}</text></view>
+  <view class="showapi_list">
+    <view class="temperature ">
+      <text class="currentTemperature">{{currentTemperature}}</text>
+      <text class="weather_sup"></text>
+      <view class="quality fs24">空气质量<text class="fs20">{{quality}}</text></view>
+    </view>
+    <view class="today_weather">
+      <image src="{{weather_pic}}" class="today_weather_pic"></image>
+      <view class="today_weather_q fs24">{{weather}}</view>
+      <view class="today_temperature fs22">{{nightAirTemperature}}~{{dayAirTemperature}}<text>℃</text></view>
+    </view>
+    <view class="weather_list">
+      <view class="weather_item" wx:for="{{list}}">
+        <view class="weekday fs20">{{(index==0)?'明天':'周'+item.weekday}}</view> 
+         <image src="{{item.day_weather_pic}}" class="weather_pic"></image>
+         <view class="weather_q fs24">{{item.day_weather}}</view>
+         <view class="temperature_q fs22">{{item.night_air_temperature}}~{{item.day_air_temperature}}<text>℃</text></view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="wallpager">
+  <view class="p_htitle fs46">
+    <text class="title">每日壁纸HOT</text>
+    <view class="des fs24">
+      换张壁纸，换个心情 
+      <text class="morelink fs25" bindtap="go_morelink"> 更多》</text>
+    </view>
+  </view>
+  <view class="wallpagerlist">
+    <view class="wallpager_item" wx:for="{{wallpagerlist}}" data-key="{{item.key}}" bindtap="binkDetailpic">
+      <image src="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/wallpaper/{{item.pic}}"></image>
+      <view class="like_w">
+        <image src="../../images/wbottom.png" class="link_bg"></image>
+        <view class="like fs20">
+          <image src="../../images/heart.png" class="hearticon"></image>
+          <text class="likeNum">{{item.like_num}}人喜欢</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="author fs24">
+   设计芭 出品
+</view>

@@ -1,0 +1,270 @@
+.top-handle{
+    height: 108rpx;
+    line-height: 108rpx;
+    position: relative;
+}
+
+.Idate{height: 30rpx;line-height: 30rpx;margin-top: -10rpx;margin-bottom: 20rpx;}
+.date-area {
+    width: 50%;
+    height: 80rpx;
+    text-align: center;
+    letter-spacing:5rpx;
+}
+.prev,.next{font-weight: bold;}
+.backtoday{
+    position: absolute;
+    width: 45rpx;
+    height: 45rpx;
+    border-radius: 100%;
+    border:2px solid #ff3b30;
+    right: 50rpx;
+    top:35rpx;
+    line-height: 45rpx;
+    text-align: center;
+    font-weight: bold;
+    color: #ff3b30;
+}
+.weeks {
+    text-align: center;
+    border-bottom: 1px solid #f2f2f2;
+    line-height: 52rpx;
+    height: 52rpx;
+    padding: 0 25rpx;
+    margin-bottom: 30rpx;
+    font-weight: bold;
+}
+.days {
+    text-align: center;
+    padding: 0 25rpx;
+    margin-bottom: 20rpx;
+}
+
+.day {
+    width: 100rpx;
+    height: 100rpx;
+    flex-flow:column;
+    margin-bottom: 27rpx;
+    border-radius: 100%;
+    border:2px solid #ffffff;
+    box-sizing: border-box;
+    position: relative;
+}
+.holiday-sign{
+  position: absolute;
+  top:10rpx;
+  left: 10rpx;
+  width: 20rpx;
+  height: 20rpx;
+  color: #fff;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 20rpx;
+  font-size: 14rpx;
+  z-index: 1;
+  background: #ff4338;
+}
+.work{
+  background: #a9a9a9;
+}
+.today,.selected {
+    background: #ff3b30;
+    border-radius: 100%;
+    border-color: #ff3b30;
+    color: #fff;
+}
+.none{
+  background: #fff;
+    border-color: #fff;
+    color: #000;
+}
+
+.daynumber{
+    line-height: 40rpx;
+}
+.almanac{
+    overflow: hidden;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+
+}
+.isFestival{
+  color: #ff4338;
+}
+.selected .isFestival{color: #fff;}
+.weather{
+  background: #f7f7f7;
+  width: 730rpx;
+  margin: 0 auto 28rpx auto;
+  border-radius: 5rpx;
+  position: relative;
+  height: 320rpx;
+  
+}
+.w_htitle{
+  line-height: 72rpx;
+  font-weight: bold;
+  padding: 0 25rpx;
+}
+.location_icon{
+  width: 19rpx;
+  height: 25rpx;
+  margin-right: 10rpx;
+  margin-top: 5rpx;
+}
+
+.close{position: absolute;top:13rpx;right: 23rpx;color: #3e3e3e;}
+
+.temperature{
+  width: 260rpx;
+  text-align: center;
+  float: left;
+}
+.currentTemperature{
+  font-size: 166rpx;
+  color: #303030;
+  line-height:180rpx;
+  
+}
+.weather_sup{
+  height: 18rpx;
+  width: 18rpx;
+  border:8rpx solid #303030;
+  border-radius: 100%;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 40rpx;
+}
+.quality{
+  line-height: 38rpx;
+}
+.quality text{
+  background: #a2a2a2;
+  color: #ffffff;
+  display: inline-block;
+  padding: 0 10rpx;
+  height: 28rpx;
+  vertical-align: top;
+  line-height: 28rpx;
+  margin: 5rpx 0 0 2px;
+  border-radius: 4rpx;
+}
+.today_weather,.weather_item{
+  float: left;
+  width: 114rpx;
+  margin: 29rpx 0 0 0;
+  text-align: center;
+}
+.today_weather_pic,.weather_pic{
+  width: 113rpx;
+  height: 113rpx;
+  vertical-align: top;
+}
+.today_weather_q,.weather_q{
+  color: #303030;
+  line-height: 42rpx;
+}
+.today_temperature,.temperature_q {
+  color: #303030;
+}
+.weather_list{
+  margin-left: 18rpx;
+  float: left;
+  width: 332rpx;
+}
+.weather_item{
+  width: 100rpx;
+}
+.weather_pic{
+  width: 90rpx;
+  height: 90rpx;
+}
+.hide{
+  display: none;
+}
+
+
+.wallpager{
+  background: #f7f7f7;
+  padding-bottom: 20rpx;
+}
+.p_htitle{
+  padding: 0 39rpx;
+  line-height: 106rpx;
+  height: 106rpx;
+  overflow: hidden;
+}
+.title{
+  width: 340rpx;
+  float: left;
+  font-weight: bold;
+}
+.des{
+  width: 310rpx;
+  float: right;
+  text-align: right;
+}
+.morelink{
+  font-weight: bold;
+  margin-left: 10rpx;
+}
+.wallpagerlist{
+  clear: both;
+  height: auto;
+  overflow: hidden;
+  padding:0 0 1rpx 0;
+
+}
+.wallpager_item{
+
+  overflow: hidden;
+  float: left;
+  width: 338rpx;
+  height: 601rpx;
+  margin: 0 0 26rpx  26rpx;
+  position: relative;
+}
+.wallpager_item image{
+  width: 100%;
+  height:100%;
+  border-radius:5rpx;
+}
+.wallpager_item .link_bg{
+ border-radius:3rpx;
+}
+.wallpager_item .hearticon{
+  display: inline-block;
+  width:28rpx;
+  height: 28rpx;
+  margin-right: 8rpx;
+  vertical-align: middle;
+}
+.like_w{
+  position: absolute;
+ 
+   width: 338rpx;
+  height: 128rpx;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+.like{
+  position: absolute;
+  line-height: 72rpx;
+  height: 72rpx;
+  text-align: center;
+  width: 300rpx;
+  bottom: 0;
+  left: 0;
+}
+.hearticon{color: #ff4338}
+
+
+.author{
+  text-align: center;
+  background: #f7f7f7;
+  padding-bottom: 20rpx;
+  color: #a2a2a2;
+  }
