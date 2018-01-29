@@ -1,9 +1,8 @@
 <!--pages/wallpaperdetail/index.wxml-->
 
-
-<swiper  duration="500"  current='{{current}}' style="height:{{wHeight}}px" bindchange="slide">
+<view  duration="500"  current='{{current}}' style="height:{{wHeight}}px">
   <block wx:for="{{wallpagerlist}}" >
-    <swiper-item >
+    <view wx:if="{{item.show}}" class="swiper-item {{index<current?'mtop':(index>current?'mbottom':'mmiddle')}}  {{up==true&&upindex==index?'up':''}} {{down==true&&downindex==index?'down':''}}" bindanimationend="animationend" bindtouchstart="touchstart" bindtouchend="slide">
       <view class="preview_wap" >
           <image src="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/wallpaper/{{item.bigpic}}" class="bigpic" bindtap="preview_pic"></image>
           <view class="des_pic fs24">
@@ -32,9 +31,9 @@
           <image src="../../images/jiemian.png" class="mask"></image>
 
       </view>
-    </swiper-item>
+    </view>
   </block>
-</swiper>
+</view>
 
 <!--
 <view class="preview_wap" >

@@ -51,7 +51,7 @@ var app =({
 
 Page({
   data: {
-   
+    hasmore:true
     },
   
   onLoad:function(options){
@@ -115,6 +115,13 @@ Page({
             for (var ii = 0; ii < res.data.items.length; ii++) {
               if (res.data.items[ii].key == that.key) {
                 current = ii;
+                res.data.items[ii].show = true;
+                if (ii != 0) {
+                  res.data.items[ii - 1].show = true;
+                }
+                if (ii != res.data.items.length - 1) {
+                  res.data.items[ii + 1].show = true;
+                }
                 break;
               }
             }
@@ -123,7 +130,7 @@ Page({
               current: current,
               current_key: that.key
             });
-
+            console.log(res.data.items)
           }
           
         }
@@ -131,7 +138,123 @@ Page({
     })
 
   },
-  slide:function(e){
+  touchstart: function (e) {
+    var that = this;
+    that.oclientY = e.changedTouches[0].clientY;
+    that.oclientX = e.changedTouches[0].clientX;
+
+  },
+  slide: function (e) {
+
+    var that = this;
+    that.nclientY = e.changedTouches[0].clientY;
+    that.nclientX = e.changedTouches[0].clientX;
+
+
+    var dir =  (that.nclientX - that.oclientX);
+
+    var items = that.data.wallpagerlist;
+    //console.log(Math.abs(that.nclientX - that.oclientX))
+    //if (Math.abs(that.nclientX -that.oclientX) < 80){
+    var hasmore = true;
+    that.setData({
+      hasmore: hasmore
+    })
+
+    if (dir < -80) {
+
+      if (that.data.current == (items.length - 1)) {
+        hasmore = false;
+      }
+      that.setData({
+        upindex: that.data.current + 1,
+        up: true,
+        down: false,
+        hasmore: hasmore
+      })
+      for (var ii = 0; ii < items.length; ii++) {
+        items[ii].show = false;
+        if ((that.data.upindex) == ii) {
+          items[ii].show = true;
+          if (ii != 0) {
+            items[ii - 1].show = true;
+          }
+          if (ii != (items.length - 1)) {
+            items[ii + 1].show = true;
+          }
+          that.setData({
+            wallpagerlist: items,
+            current_title: items[ii].title,
+            current_key: items[ii].key
+          });
+          that.addPreNum(items[ii].key);
+          //that.setPre(app.globalData.openid, items[ii].id, that.data.userInfo.avatarUrl);
+          //this.audioCtx.seek(0)
+          //setTimeout(function () { that.audioCtx.play() }, 180)
+          break;
+        }
+      }
+    } else if (dir > 80) {
+      if (that.data.current == 0) {
+        hasmore = false;
+        console.log(hasmore, that.data.current)
+
+      }
+      that.setData({
+        downindex: that.data.current - 1,
+        down: true,
+        up: false,
+        hasmore: hasmore
+
+      })
+      for (var ii = 0; ii < items.length; ii++) {
+        items[ii].show = false;
+      }
+      for (var ii = 0; ii < items.length; ii++) {
+
+        if ((that.data.downindex) == ii) {
+          items[ii].show = true;
+          if (ii != 0) {
+            items[ii - 1].show = true;
+          }
+          if (ii != (items.length - 1)) {
+            items[ii + 1].show = true;
+          }
+          that.setData({
+            wallpagerlist: items,
+            current_title: items[ii].title,
+            current_key: items[ii].key
+          });
+          that.addPreNum(items[ii].key);
+          //that.setPre(app.globalData.openid, items[ii].id, that.data.userInfo.avatarUrl);
+          //this.audioCtx.seek(0)
+          //setTimeout(function () { that.audioCtx.play() }, 180)
+
+          break;
+        }
+      }
+    }
+    
+
+    //}
+    
+  },
+  animationend: function () {
+    var that = this;
+    if (that.data.up == true) {
+      that.setData({
+        current: that.data.current + 1
+      })
+    } else {
+      that.setData({
+        current: that.data.current - 1
+      })
+    }
+
+
+
+  },
+  /*slide:function(e){
     var that=this;
     var items = that.data.wallpagerlist;
     for (var ii = 0; ii < items.length;ii++){
@@ -149,7 +272,7 @@ Page({
       isclickLike: false,
     });
     
-  },
+  },*/
   onReady:function(){
     // 页面渲染完成
   },
@@ -194,42 +317,7 @@ Page({
       }
     })
   },
-  getDetailPic:function(key){
-    var that=this;
-        console.log("sdf",app)
-        wx.request({
-        url: 'https://h5.yunplus.com.cn/cases/weChatApplet/calendar/do/getoneWallpaper.php',
-        data:{
-          key:key,
-          openid:app.globalData.openid
-        },
-        success: function (res) {
-          console.log(res)
-           //var r = /\{(.+?)\}/g;
-          // console.log(res.data.match(r)[0])
-          // console.log(JSON.parse(res.data.match(r)[0]))
-          if(typeof(res.data)=='string'){
-
-            res.data=res.data.replace(/(^\s*)|(\s*$)/g, "");
-            res.data=JSON.parse(res.data);
-          } 
-
-          if(res.data.success){
-            that.setData({
-                key:res.data.items.key,
-                pic:res.data.items.pic,
-                bigpic:res.data.items.bigpic,
-                like_num:res.data.items.like_num,
-                islike:res.data.items.islike,
-                down_num: res.data.items.down_num,
-                pre_num: res.data.items.pre_num,
-                
-                
-            });
-          }
-        }
-      })
-  },
+  
   download_pic:function(e){
     var that=this;
     var pic=e.currentTarget.dataset.pic;
@@ -246,7 +334,7 @@ Page({
               // console.log(res1)
 
 
-              that.addDownNum(that.key);
+              that.addDownNum(that.data.current_key);
               wx.showToast({
                 title: '已保存到系统相册',
                 icon: 'success',
