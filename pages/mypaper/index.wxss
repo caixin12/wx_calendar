@@ -3,7 +3,10 @@ page{
     background: #f7f7f7;
 }
 .logo_con{
+      background: #000;
+
     position: relative;
+    padding-top: 50rpx;
 }
 .logo_bg{
     width: 750rpx;
@@ -14,7 +17,7 @@ page{
 .set{
   position: absolute;
  
-  top:20rpx;
+  top:150rpx;
   right: 45rpx;
 
 }
@@ -25,7 +28,7 @@ page{
 }
 .userinfo{
     position: absolute;
-    top:127rpx;    
+    top:177rpx;    
     width: 750rpx;
     
 }
@@ -44,6 +47,8 @@ page{
     height: 50rpx;
     text-align: center;
     font-size: 34rpx;
+    width: 100%;
+    display: block;
 }
 
 .contact{

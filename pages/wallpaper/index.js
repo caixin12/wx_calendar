@@ -1,33 +1,47 @@
 // pages/wallpaper/index.js
+var pageNum = 1,
+  pageNum_arr = [1];
 Page({
-  data:{},
+  data:{
+    type: 'new',
+    category: '',
+    menu_zt: 'open',
+    hasmore: false,
+    isbottom: false,
+    wallpagerlist: []
+  },
   onLoad:function(options){
+    pageNum = 1;
+    pageNum_arr = [1];
     // 页面初始化 options为页面跳转所带来的参数
-    this.loadpic('new','');
     this.setData({
       type:'new',
       category:'',
-      menu_zt:'open'
+      menu_zt:'open',
+      hasmore: false,
+      isbottom: false,
+      wallpagerlist:[]
     })
     wx.setNavigationBarTitle({
       title: '壁纸'
     })
+    this.loadpic();
+
   },
   onPullDownRefresh: function(){
      var that=this;
-    
-
     wx.stopPullDownRefresh()
   },
   onReady:function(){
     // 页面渲染完成
+    
   },
   onShow:function(){
     // 页面显示
     var that=this;
-    if(that.data.type=='hot'){
-      that.loadpic('hot',that.data.category)
-    }
+     
+    //this.loadpic();
+
   },
   onHide:function(){
     // 页面隐藏
@@ -45,22 +59,21 @@ Page({
   },
   bindTab:function(e){
     var that=this;
-    console.log(e.currentTarget,that.data.category)
     var type=e.currentTarget.dataset.key;
+    
+    pageNum=1;
+    pageNum_arr = [1]
     that.setData({
-      type
-    })
-    that.setData({
-      hide:'hide'
-    });
-    if(type=='hot'){
-      that.loadpic('hot',that.data.category)
-    } else if (type == 'new'){
-      that.loadpic('new',that.data.category)
-    }else{
-      that.loadpic('random', that.data.category)
+      type:type,
+      hasmore: false,
+      isbottom: false,
+      wallpagerlist: [],
+      hide: 'hide'
 
-    }
+    })
+  
+    that.loadpic()
+
     
   },
   bindMenu:function(){
@@ -77,13 +90,14 @@ Page({
       });
     }
   },
-  loadpic:function(type,category){
+  loadpic: function (){
     var that=this;
     wx.request({
         url: 'https://h5.yunplus.com.cn/cases/weChatApplet/calendar/do/getlist.php',
         data:{
-          paixu:type,
-          category:category
+          paixu: that.data.type,
+          category: that.data.category,
+          pageNum: pageNum
         },
         success: function (res) {
           if(typeof(res.data)=='string'){
@@ -93,16 +107,49 @@ Page({
           }
 
           if(res.data.success){
+
+            var wallpagerlist = that.data.wallpagerlist;
+            for (var i = 0; i < res.data.items.length; i++) {
+              wallpagerlist.push(res.data.items[i]);
+            }
+            
             that.setData({
-              wallpagerlist:res.data.items,
-              hide:''
+              wallpagerlist: wallpagerlist,
+              hasmore: res.data.hasmore,
+              hide: ''
+
             });
+            pageNum++;
+
           }
         }
       })
     
   },
-  
+  /**
+  * 页面上拉触底事件的处理函数
+  */
+  onReachBottom: function (e) {
+    var that = this;
+
+    if (that.data.hasmore == true && pageNum_arr[pageNum_arr.length - 1] != pageNum && that.data.type !='random') {
+
+      pageNum_arr.push(pageNum)
+      that.loadpic();
+    }
+
+    if (that.data.hasmore == false) {
+      that.setData({
+        isbottom: true
+      })
+      setTimeout(function () {
+        that.setData({
+          isbottom: false
+        })
+      }, 1700)
+    }
+
+  },
   binkDetailpic:function(e){
     var that=this;
     var key=e.currentTarget.dataset.key;

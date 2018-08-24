@@ -1,65 +1,29 @@
 // pages/wallpaperdetail/index.js
-//app.js
-var app =({
-
-  getUserInfo: function (cb) {
-    var that = this
-    if (this.globalData.userInfo) {
-      typeof cb == "function" && cb(this.globalData.userInfo)
-    } else {
-      //调用登录接口
-      wx.login({
-        success: function (res) {
-
-          console.log(res)
-          if (res.code) {
-            wx.request({
-              url: 'https://api.weixin.qq.com/sns/jscode2session',
-              data: {
-                appid: 'wx1056662f250119da',
-                secret: '205c9da330a01252016383c8b58c290d',
-                js_code: res.code,
-                grant_type: 'authorization_code'
-              },
-              success: function (Lres) {
-
-                that.globalData.openid = Lres.data.openid;
-                wx.getUserInfo({
-                  success: function (Ures) {
-
-                    that.globalData.userInfo = Ures.userInfo
-                    typeof cb == "function" && cb(that.globalData.openid, that.globalData.userInfo)
-                  }
-                })
-               
-              },
-              fail: function (Lres) { }
-            })
-          }
-        
-        }
-      })
-    }
-  },
-  globalData: {
-    userInfo: null,
-    openid: null
-  }
-})
-
-//var app = getApp();
+const app = getApp()
 
 Page({
   data: {
-    hasmore:true
-    },
-  
+    hasmore:true,
+    //是否授权登录
+    hasshouquan:false
+  },
+  /**
+ * 获取用户信息接口后的处理逻辑
+ */
+  getUserInfo: function (e) {
+    var that=this;
+    // 将获取的用户信息赋值给全局 userInfo 变量，再跳回之前页
+    if (e.detail.userInfo) {
+      app.globalData.userInfo = e.detail.userInfo
+      that.setData({
+        hasshouquan:true
+      })
+    }
+  },
   onLoad:function(options){
     var that=this;
     // 页面初始化 options为页面跳转所带来的参数
-    wx.setNavigationBarTitle({
-      title: '壁纸'
-    })
+   
     that.key=options.key;
     that.sort = options.sort;
     that.category = options.category;
@@ -67,17 +31,33 @@ Page({
       that.category='';
 
     }
+    if (app.globalData.userInfo){
+      that.setData({
+        hasshouquan: true
+      })
+    }
+    
 
-    app.getUserInfo(function (userInfo) {
-     // that.getDetailPic(options.key);
+    if (app.globalData.openid && app.globalData.openid != '') {
+
       that.addPreNum(options.key);
-
       that.loadpic(that.sort, that.category)
+    } else {
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.openidReadyCallback = openid => {
+        if (openid != '') {
 
-    })
+          that.addPreNum(options.key);
+          that.loadpic(that.sort, that.category)
+        }
+      }
+    }
+
+    
+
     wx.getSystemInfo({
       success: function(res) {
-        console.log(res.windowHeight)
         that.setData({
           wHeight:res.windowHeight,
           wHeightM: res.windowHeight+5
@@ -96,6 +76,7 @@ Page({
         openid: app.globalData.openid
       },
       success: function (res) {
+        console.log("res")
         if (typeof (res.data) == 'string') {
 
           res.data = res.data.replace(/(^\s*)|(\s*$)/g, "");
@@ -254,25 +235,7 @@ Page({
 
 
   },
-  /*slide:function(e){
-    var that=this;
-    var items = that.data.wallpagerlist;
-    for (var ii = 0; ii < items.length;ii++){
-      if (e.detail.current==ii){
-        that.setData({
-         
-          current_key: items[ii].key
-        });
-        that.addPreNum(items[ii].key);
-        break;
-      }
-    }
-    that.setData({
-      hide: '',
-      isclickLike: false,
-    });
-    
-  },*/
+
   onReady:function(){
     // 页面渲染完成
   },
@@ -289,7 +252,8 @@ Page({
   },
   addPreNum:function(key){
     var that=this;
-     wx.request({
+    console.log(app.globalData.openid)
+  wx.request({
         url: 'https://h5.yunplus.com.cn/cases/weChatApplet/calendar/do/addpre.php',
         data:{
           key:key,
@@ -403,7 +367,6 @@ Page({
   likebtn_pic:function(e){
     var that=this;
     var islike=e.currentTarget.dataset.like;
-    app.getUserInfo(function (userInfo) {
       var url='';
       var islike_new=true;
       if (islike == 'p_false') {
@@ -419,7 +382,7 @@ Page({
         data: {
           key: that.data.current_key,
           openid: app.globalData.openid,
-          nickName: app.globalData.userInfo.nickName
+         // nickName: app.globalData.userInfo.nickName
         },
         success: function (res) {
           if (typeof (res.data) == 'string') {
@@ -435,7 +398,6 @@ Page({
                 items[ii].like_num = res.data.like_num;
                 items[ii].islike = islike_new;
                 that.setData({
-
                   wallpagerlist: items
                 });
                 break;
@@ -445,7 +407,6 @@ Page({
           }
         }
       })
-    })
 
 
     

@@ -1,4 +1,3 @@
-{{nickName}}
 
 <view class="flex box box-tb box-pack-center box-align-center" >
   <view class="calendar  box box-tb">
@@ -46,28 +45,30 @@
 </view>
 
 <view class="weather {{weather_hide}}">
+  
   <view class="close" bindtap='handleCloseweather'>x</view>
-  <view class="w_htitle fs36">今日天气 <image src="../../images/location_icon.png" class="location_icon"></image> <text class="city fs24">{{city}}</text></view>
+  <view class="w_htitle fs36">今日天气 <image src="../../images/location_icon.png" class="location_icon"></image> <text class="city fs24">{{weatherData.currentCity}}</text></view>
   <view class="showapi_list">
     <view class="temperature ">
-      <text class="currentTemperature">{{currentTemperature}}</text>
+      <text class="currentTemperature">{{weatherData.currenttemperature}}</text>
       <text class="weather_sup"></text>
-      <view class="quality fs24">空气质量<text class="fs20">{{quality}}</text></view>
+      <view class="quality fs24">PM2.5<text class="fs20">{{weatherData.pm25}}</text></view>
     </view>
     <view class="today_weather">
-      <image src="{{weather_pic}}" class="today_weather_pic"></image>
-      <view class="today_weather_q fs24">{{weather}}</view>
-      <view class="today_temperature fs22">{{nightAirTemperature}}~{{dayAirTemperature}}<text>℃</text></view>
+      <image src="{{weatherData.PictureUrl}}" class="today_weather_pic"></image>
+      <view class="today_weather_q fs20">{{weatherData.weatherDesc}}</view>
+      <view class="today_temperature fs22">{{weatherData.temperature}}</view>
     </view>
     <view class="weather_list">
-      <view class="weather_item" wx:for="{{list}}">
-        <view class="weekday fs20">{{(index==0)?'明天':'周'+item.weekday}}</view> 
-         <image src="{{item.day_weather_pic}}" class="weather_pic"></image>
-         <view class="weather_q fs24">{{item.day_weather}}</view>
-         <view class="temperature_q fs22">{{item.night_air_temperature}}~{{item.day_air_temperature}}<text>℃</text></view>
+      <view class="weather_item" wx:for="{{futureWeather}}" wx:if="{{index>0}}">
+        <view class="weekday fs20">{{(index==1)?'明天':item.date}}</view> 
+         <image src="{{item.PictureUrl}}" class="weather_pic"></image>
+         <view class="weather_q fs20">{{item.weather}}</view>
+         <view class="temperature_q fs18">{{item.temperature}}</view>
       </view>
     </view>
   </view>
+  {{tips}}
 </view>
 
 <view class="wallpager">

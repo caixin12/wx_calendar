@@ -1,3 +1,6 @@
+page{
+  padding-top: 50rpx;
+}
 .top-handle{
     height: 108rpx;
     line-height: 108rpx;
@@ -6,7 +9,7 @@
 
 .Idate{height: 30rpx;line-height: 30rpx;margin-top: -10rpx;margin-bottom: 20rpx;}
 .date-area {
-    width: 50%;
+    width: 40%;
     height: 80rpx;
     text-align: center;
     letter-spacing:5rpx;
@@ -18,7 +21,7 @@
     height: 45rpx;
     border-radius: 100%;
     border:2px solid #ff3b30;
-    right: 50rpx;
+    left: 50rpx;
     top:35rpx;
     line-height: 45rpx;
     text-align: center;
@@ -165,6 +168,8 @@
 .today_weather_q,.weather_q{
   color: #303030;
   line-height: 42rpx;
+  overflow: hidden;
+  height: 42rpx;
 }
 .today_temperature,.temperature_q {
   color: #303030;

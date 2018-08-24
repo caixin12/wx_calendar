@@ -1,4 +1,14 @@
 /* pages/wallpaperdetail/index.wxss */
+.button-hover {
+background-color:transparent;
+border: 0
+}
+button[size=mini] {
+  padding: 0;
+  background:transparent;
+border: 0
+
+}
 .preview_wap{
     position: fixed;
     top:0;

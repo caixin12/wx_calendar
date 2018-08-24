@@ -1,3 +1,4 @@
+var bmap = require('../../libs/bmap-wx/bmap-wx.js');  
 // pages/rili/index.js
 const calendar = {
     
@@ -660,7 +661,6 @@ const calendar = {
     }
 
 }
-var app = getApp();
 const conf = {
   data: {
     // hasEmptyGrid 变量控制是否渲染空格子，若当月第一天是星期天，就不应该渲染空格子
@@ -727,7 +727,7 @@ const conf = {
 
       days.push({cDay:i,cMonth:month,IDayCn:Festival || Term||IDayCn,isToday:isToday,gzYear:gzYear,Animal:Animal,IMonthCn:IMonthCn,IDayCnY:IDayCn,solarFestivalBX:solarFestivalBX,isFestival:(Festival)?true:false});
     }
-    console.log(days)
+    //console.log(days)
     this.setData({
       days
     });
@@ -768,19 +768,9 @@ const conf = {
       selected:now_day
     })
 
-    //获取坐标 用于获取天气信息
-    this.getLocation();
 
-    //获取壁纸
-    this.getwallpager();
     
-    app.getUserInfo(function(openid,userInfo){
-      
-      var nickName=userInfo.nickName;
-      
-      //console.log(openid,nickName)
-    })
-    console.log(that.data.days)
+    
   },
   // 切换控制年月
   handleCalendar(e) {
@@ -908,91 +898,173 @@ const conf = {
   //替换天气图标
   repeatIcon:function(iconLink){
     var that=this;
-    //iconLink='http://app1.showapi.com/weather/icon/day/00.png';
+    //iconLink='http://api.map.baidu.com/images/weather/day/duoyun.png';
     var iconlist=iconLink.split("/");
-    var icon_index=iconlist[iconlist.length-1].split(".")[0];
-    return '../../images/icon/'+icon_index+'.png'
+    var icon_name=iconlist[iconlist.length-1].split(".")[0];
+
+    var icon_index="0";
+    switch (icon_name) {
+      case 'qing':
+        icon_index="00";
+        break;
+      case 'duoyun':
+        icon_index = "01";
+        break;
+      case 'yin':
+        icon_index = "02";
+        break;
+      case 'zhenyu':
+        icon_index = "03";
+        break;
+      case 'leizhenyu':
+        icon_index = "04";
+        break;
+      case 'leizhenyubanyoubingbao':
+        icon_index = "05";
+        break;
+      case 'yujiaxue':
+        icon_index = "06";
+        break;
+      case 'xiaoyu':
+        icon_index = "07";
+        break;
+      case 'zhongyu':
+        icon_index = "08";
+        break;
+      case 'dayu':
+        icon_index = "09";
+        break;
+      case 'baoyu':
+        icon_index = "10";
+        break;
+      case 'dabaoyu':
+        icon_index = "11";
+        break;
+      case 'tedabaoyu':
+        icon_index = "12";
+        break;
+      case 'zhenxue':
+        icon_index = "13";
+        break;
+      case 'xiaoxue':
+        icon_index = "14";
+        break;
+      case 'zhongxue':
+        icon_index = "15";
+        break;
+      case 'daxue':
+        icon_index = "16";
+        break;
+      case 'baoxue':
+        icon_index = "17";
+        break;
+      case 'wu':
+        icon_index = "18";
+        break;
+      case 'dongyu':
+        icon_index = "19";
+        break;
+      case 'shachenbao':
+        icon_index = "20";
+        break;
+      case 'xiaoyuzhuanzhongyu':
+        icon_index = "21";
+        break;
+      case 'zhongyuzhuandayu':
+        icon_index = "22";
+        break;
+      case 'dayuzhuanbaoyu':
+        icon_index = "23";
+        break;
+      case 'baoyuzhuandabaoyu':
+        icon_index = "24";
+        break;
+      case 'dabaoyuzhuantedabaoyu':
+        icon_index = "25";
+        break;
+      case 'xiaoxuezhuanzhongxue':
+        icon_index = "26";
+        break;
+      case 'zhongxuezhuandaxue':
+        icon_index = "27";
+        break;
+      case 'daxuezhuanbaoxue':
+        icon_index = "28";
+        break;
+      case 'fuchen':
+        icon_index = "29";
+        break;
+      case 'yangsha':
+        icon_index = "30";
+        break;
+      case 'qiangshachenbao':
+        icon_index = "31";
+        break;
+      case 'mai':
+        icon_index = "53";
+        break;
+      default:
+        icon_index="0"
+        break;
+    }
+
+    if (icon_index == "0"){
+      return iconLink;
+    }else{
+      return '../../images/icon/' + icon_index + '.png'
+    }
+
+
+
+    
   },
 
   //获取天气
-  getWeather:function(longitude,latitude){
+  getWeather:function(){
     var that=this;
     var weekday_arr=['一','二','三','四','五','六','日'];
-    //通过经纬度请求数据
-        wx.request({
-          //这个网站有免费API赶紧收藏
-          url: 'https://route.showapi.com/9-5',
-          data: {
-            showapi_appid: '52597',
-            showapi_sign: '16a57bdfe48a450a9e1113d8c62d3247',
-            //
-            from: '5',
-            lng: longitude,
-            lat: latitude,
-            //获取一周情况 0是不获取
-            needMoreDay: '1',
-            needIndex: '1'
-          },
-          success: function (res) {
-           console.log("sdfsd",res)
-            //console.log(res.data.showapi_res_body.now.api)
-           // console.log(that.repeatIcon());
-            that.setData({
-              city:res.data.showapi_res_body.cityInfo.c5,//城市
-              //改变加载状态
-              loadingHidden: true,
 
-              currentTemperature: res.data.showapi_res_body.now.temperature,//实时天气
-              nightAirTemperature: res.data.showapi_res_body.f1.night_air_temperature,//晚上天气温度(摄氏度)
-              dayAirTemperature: res.data.showapi_res_body.f1.day_air_temperature,//白天天气温度(摄氏度)
-              weather: res.data.showapi_res_body.now.weather,//天气
-              weather_pic:that.repeatIcon(res.data.showapi_res_body.now.weather_pic),//天气小图标
-              aqi: res.data.showapi_res_body.now.aqi,//空气指数，越小越好
-              quality: res.data.showapi_res_body.now.aqiDetail.quality,//空气质量指数类别，有“优、良、轻度污染、中度污染、重度污染、严重污染”6类
-              windPower: res.data.showapi_res_body.now.wind_power,//风力
-              windDirection: res.data.showapi_res_body.now.wind_direction,//风向
-              //拼接数组
-              list: [
-                {
-                  'day_weather_pic': that.repeatIcon(res.data.showapi_res_body.f2.day_weather_pic),
-                  'weekday': weekday_arr[res.data.showapi_res_body.f2.weekday-1],
-                  'day_air_temperature': res.data.showapi_res_body.f2.day_air_temperature,
-                  'night_air_temperature': res.data.showapi_res_body.f2.night_air_temperature,
-                  'day_weather': res.data.showapi_res_body.f2.day_weather
-                },
-                {
-                  'day_weather_pic': that.repeatIcon(res.data.showapi_res_body.f3.day_weather_pic),
-                  'weekday': weekday_arr[res.data.showapi_res_body.f3.weekday-1],
-                  'day_air_temperature': res.data.showapi_res_body.f3.day_air_temperature,
-                  'night_air_temperature': res.data.showapi_res_body.f3.night_air_temperature,
-                  'day_weather': res.data.showapi_res_body.f3.day_weather
-                },
-                {
-                  'day_weather_pic': that.repeatIcon(res.data.showapi_res_body.f4.day_weather_pic),
-                  'weekday': weekday_arr[res.data.showapi_res_body.f4.weekday-1],
-                  'day_air_temperature': res.data.showapi_res_body.f4.day_air_temperature,
-                  'night_air_temperature': res.data.showapi_res_body.f4.night_air_temperature,
-                  'day_weather': res.data.showapi_res_body.f4.day_weather
-                }
+    var BMap = new bmap.BMapWX({
+      ak: "3FzjgDlHgr6GICOqY0PbWj7egoWBgigM"
+    });
 
-              ]
-            })
-          }
-        })
-  },
-  //获取坐标
-  getLocation:function(){
-    var that=this;
-    wx.getLocation({
-      success: function (res) {
-        that.getWeather(res.longitude,res.latitude)  
+    var fail = function (data) {
+      console.log(data);
+    };
+    var success = function (data) {
+      console.log(data);
+
+      var weatherData = data.currentWeather[0];
+      var futureWeather = data.originalData.results[0].weather_data;
+      weatherData.currenttemperature = weatherData.date.match("\\((.+?)\\)")[1].split("：")[1].split("℃")[0]
+
+      weatherData.PictureUrl = that.repeatIcon(weatherData.dayPictureUrl) 
+
+      for (var ii = 0; ii < futureWeather.length;ii++){
+        futureWeather[ii].PictureUrl = that.repeatIcon(futureWeather[ii].dayPictureUrl) 
       }
-    })
+
+      that.setData({
+        weatherData: weatherData,
+        futureWeather: futureWeather
+      });
+    }
+
+    // 发起weather请求   
+    BMap.weather({
+      fail: fail,
+      success: success
+    });   
+
+    
+     
   },
+  
    onShow:function(){
     // 页面显示
     var that=this;
     that.getwallpager()
+    that.getWeather() 
   },
   //获取壁纸列表
   getwallpager:function(){
@@ -1000,7 +1072,9 @@ const conf = {
     wx.request({
       url: 'https://h5.yunplus.com.cn/cases/weChatApplet/calendar/do/getlist.php',
       data:{
-        paixu:'Lhot'
+        paixu:'Lhot',
+        pageNum:1,
+        pageSize:2
         },
       success: function (res) {
         if(typeof(res.data)=='string'){

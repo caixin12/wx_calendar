@@ -20,7 +20,7 @@ page{
   width: 100%;
   clear: both;
   height: 237rpx;
-  padding: 53rpx 0 0 0;
+  padding: 103rpx 0 0 0;
   display: none;
 }
 .categoryList.active{display: block;}

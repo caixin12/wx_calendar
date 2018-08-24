@@ -2,8 +2,8 @@
 <view class="logo_con">
     <image src="../../images/my_bg.png" class="logo_bg"></image>
     <view class="userinfo">
-        <image src="{{logo}}" class="logopic"></image>
-        <view class="nick">{{nickName}}</view>
+        <open-data type="userAvatarUrl"  class="logopic"></open-data>
+        <open-data type="userNickName" class="nick"></open-data>
     </view>
     <view class="set" bindtap="opentk"><image src="../../images/set.png"></image></view>
 </view>

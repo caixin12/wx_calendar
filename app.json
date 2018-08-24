@@ -1,12 +1,13 @@
 {
   "pages":[
-        
+            "pages/wallpaper/index",
             
-    "pages/wallpaper/index",
-    "pages/index/index",
-    "pages/logs/logs",
-    "pages/wallpaperdetail/index",
-    "pages/mypaper/index",
+                                "pages/wallpaperdetail/index",
+                                
+                                                                    "pages/mypaper/index",
+                                                                    
+                "pages/index/index",
+                "pages/logs/logs",
     "pages/category/index"
 
   ],
@@ -15,7 +16,8 @@
     "navigationBarBackgroundColor": "#000000",
     "navigationBarTitleText": "日历",
     "navigationBarTextStyle":"#fff",
-    "enablePullDownRefresh":false
+    "enablePullDownRefresh":false,
+    "navigationStyle": "custom"
 
   },
   "tabBar": {

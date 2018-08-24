@@ -106,11 +106,14 @@
 .blue-color {
   color: #ff4338;
 }
+.fs18 {
+  font-size: 18rpx;
+}
 .fs20 {
   font-size: 20rpx;
 }
 .fs22 {
-  font-size: 20rpx;
+  font-size: 22rpx;
 }
 .fs24 {
   font-size: 24rpx;
