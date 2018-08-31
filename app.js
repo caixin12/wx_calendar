@@ -53,10 +53,27 @@ App({
       }
     })
 
+    wx.getSystemInfo({
+      success: function (res) {
+        let nav_top = res.statusBarHeight + 4;
+        console.log(res)
+        if (res.system.toLowerCase().indexOf('android') >=0 ) {
+          nav_top += 4;
+        }
+
+        that.globalData.screenWidth = res.screenWidth;
+        that.globalData.screenHeight = res.screenHeight;
+        that.globalData.statusBarHeight = nav_top;
+        
+      }
+    })
   },
   
   globalData:{
     userInfo:null,
-    openid:null
+    openid:null,
+    statusBarHeight:null,
+    screenWidth:null,
+    screenHeight:null
   }
 })

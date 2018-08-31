@@ -116,6 +116,7 @@ page{
   height: 25rpx;
   margin-right: 10rpx;
   margin-top: 5rpx;
+  display: inline-block;
 }
 
 .close{position: absolute;top:13rpx;right: 23rpx;color: #3e3e3e;}

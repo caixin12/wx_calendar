@@ -1,0 +1,48 @@
+<!--pages/wallpaperdetail/index.wxml-->
+
+
+
+<view class="backUp " style="top:{{statusBarHeight}}px ">
+  <navigator open-type="navigateBack" delta='1' hover-class="other-navigator-hover">
+    <image src="../../images/back_light.png"></image>
+  </navigator>
+
+</view>
+
+<swiper class="scroll-view_H" style='height:{{screenHeight}}px' bindchange="slide">
+
+  <swiper-item wx:for="{{wallpagerlist}}" wx:if="{{item.show}}" class="swiper-item {{index<current?'mtop':(index>current?'mbottom':'mmiddle')}}  {{up==true&&upindex==index?'up':''}} {{down==true&&downindex==index?'down':''}}">
+    <view class="preview_wap">
+      <image src="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/wallpaper/{{item.bigpic}}" class="bigpic" bindtap="preview_pic" mode="widthFix"></image>
+      
+    </view>
+    <view class="preview_pwap {{hide}}" style="height:{{screenHeight}}px" bindtap="hide_pic">
+
+      <image src="../../images/jiemian.png" class="mask" mode="widthFix"></image>
+
+    </view>
+  </swiper-item>
+</swiper>
+<view class="des_pic fs24  {{isfixed==true?'':'Prelative'}}   ">
+        <view class="tabitem  ">
+          <view class="iconfont eyeicon"></view>
+          <text>{{item.pre_num}}</text>浏览
+        </view>
+        <view class="tabitem btabitem" bindtap="download_pic" data-pic="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/wallpaper/{{item.bigpic}}">
+          <view class="iconfont downicon"></view>
+
+          <text>{{item.down_num}}</text>下载
+        </view>
+
+        <view class="tabitem" bindtap="likebtn_pic" data-like='p_{{islike}}' wx:if="{{isclickLike}}">
+          <view class="iconfont  {{islike ?'likedicon red-color':'likeicon' }} "></view>
+
+          <text>{{like_num}}</text>喜欢
+        </view>
+        <view class="tabitem" bindtap="likebtn_pic" data-like='p_{{item.islike}}' wx:else>
+          <view class="iconfont   {{item.islike? 'likedicon red-color' :'likeicon' }} "></view>
+          <text>{{item.like_num}}</text>喜欢
+        </view>
+
+
+      </view>

@@ -5,7 +5,8 @@
         <open-data type="userAvatarUrl"  class="logopic"></open-data>
         <open-data type="userNickName" class="nick"></open-data>
     </view>
-    <view class="set" bindtap="opentk"><image src="../../images/set.png"></image></view>
+    <view class="set" bindtap="opentk" style="top:{{statusBarHeight}}px ">
+    <image src="../../images/set.png"></image></view>
 </view>
 
 <view class="tablist fs36">

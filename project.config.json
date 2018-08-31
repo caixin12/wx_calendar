@@ -20,9 +20,28 @@
 			"current": -1,
 			"list": []
 		},
-		"miniprogram": {
+		"plugin": {
 			"current": -1,
 			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": 0,
+			"list": [
+				{
+					"id": -1,
+					"name": "a",
+					"pathName": "pages/wallpaperdetail/index",
+					"scene": "1044",
+					"shareInfo": {
+						"groupName": "测试模拟群0",
+						"shareName": "KAJOIy9WJV6pFobZjjtqvEvcAt0eyQPmfAdl73qeY8Q@cr4dev",
+						"shareKey": "rdsXoPfwtrdghjj9xBFM0-QPBzuaaOQ-uLTR-mITIo2_g-VXV-aZ12tuTomVGBWQzeT6vKO506IkKmoj1cENzQ~~"
+					}
+				}
+			]
 		}
 	}
 }

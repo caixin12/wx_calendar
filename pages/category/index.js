@@ -1,11 +1,14 @@
 // pages/category/index.js
+const app = getApp()
+
 var pageNum = 1,
   pageNum_arr = [1];
 Page({
   data:{
     hasmore: false,
     isbottom: false,
-    wallpagerlist: []
+    wallpagerlist: [],
+    statusBarHeight: app.globalData.statusBarHeight
   },
   loadpic(){
     let that=this;
@@ -55,7 +58,8 @@ Page({
     that.setData({
       hasmore: false,
       isbottom: false,
-      wallpagerlist: []
+      wallpagerlist: [],
+      title: category
     })
     that.loadpic()
 

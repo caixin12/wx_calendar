@@ -1,6 +1,11 @@
 <!--pages/category/index.wxml-->
+<view style="padding-top:{{38+statusBarHeight}}px ">
+<view class='topnav' style="padding-top:{{statusBarHeight}}px ">
+    <navigator  open-type="navigateBack" delta='1' hover-class="other-navigator-hover"><image src="../../images/back_light.png"></image></navigator>
+    {{title}}
+</view>
 
-<view class="wallpagerlist {{hide}}">
+<view class="wallpagerlist {{hide}}" >
     <view class="wallpager_item" wx:for="{{wallpagerlist}}" data-key="{{item.key}}" bindtap="binkDetailpic">
       <image src="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/wallpaper/{{item.pic}}"></image>
 
@@ -12,4 +17,5 @@
         </view>
       </view>
     </view>
+</view>
 </view>

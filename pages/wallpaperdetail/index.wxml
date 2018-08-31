@@ -1,31 +1,43 @@
 <!--pages/wallpaperdetail/index.wxml-->
 
+<view class="backUp " style="top:{{statusBarHeight}}px ">
+  <navigator open-type="navigateBack" delta='1' hover-class="other-navigator-hover">
+    <image src="../../images/back_light.png"></image>
+  </navigator>
+
+</view>
 <view duration="500" current='{{current}}' style="height:{{wHeight}}px">
   <block wx:for="{{wallpagerlist}}">
     <view wx:if="{{item.show}}" class="swiper-item {{index<current?'mtop':(index>current?'mbottom':'mmiddle')}}  {{up==true&&upindex==index?'up':''}} {{down==true&&downindex==index?'down':''}}" bindanimationend="animationend" bindtouchstart="touchstart" bindtouchend="slide">
       <view class="preview_wap">
         <image src="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/wallpaper/{{item.bigpic}}" class="bigpic" bindtap="preview_pic" mode="aspectFill"></image>
 
-        <view class="des_pic fs24">
-          <view class="tabitem firstChlid">
-            <image src="../../images/eye_icon.png"></image>
+        <view class='sharecon fs24' wx:if="{{item.isyuancuan==1}}">
+          <view class='author'>原创作者：{{item.author}}</view>
+          <view class='creatTime'>{{item.dataTime}}</view>
+          <button open-type="share" class="sharebtn" wx:if="{{item.allowDown==false}}">分享解锁下载</button>
+
+        </view>
+
+
+        <view wx:if="{{item.isyuancuan==0 || item.allowDown==true}}" class="des_pic fs24  {{isfixed==true?'':'Prelative'}}   ">
+          <view class="tabitem  ">
+            <view class="iconfont eyeicon"></view>
             <text>{{item.pre_num}}</text>浏览
           </view>
-          <view class="tabitem" bindtap="download_pic" data-pic="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/wallpaper/{{item.bigpic}}">
-            <image src="../../images/download_icon.png"></image>
+          <view class="tabitem btabitem" bindtap="download_pic" data-pic="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/wallpaper/{{item.bigpic}}">
+            <view class="iconfont downicon"></view>
+
             <text>{{item.down_num}}</text>下载
           </view>
 
-          <!--<button class="enter-button" wx:if="{{!hasshouquan}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" size='mini'> sss</button>-->
-
-
-
           <view class="tabitem" bindtap="likebtn_pic" data-like='p_{{islike}}' wx:if="{{isclickLike}}">
-            <image src="{{islike?'../../images/heart_s_icon.png':'../../images/heart_icon.png'}}"></image>
+            <view class="iconfont  {{islike ?'likedicon red-color':'likeicon' }} "></view>
+
             <text>{{like_num}}</text>喜欢
           </view>
           <view class="tabitem" bindtap="likebtn_pic" data-like='p_{{item.islike}}' wx:else>
-            <image src="{{item.islike?'../../images/heart_s_icon.png':'../../images/heart_icon.png'}}"></image>
+            <view class="iconfont   {{item.islike? 'likedicon red-color' :'likeicon' }} "></view>
             <text>{{item.like_num}}</text>喜欢
           </view>
 

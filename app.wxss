@@ -1,4 +1,8 @@
 /**app.wxss**/
+@import 'libs/styles/stylesheet.wxss';
+.iconfont{
+  font-family: 'iconfont';
+}
 .container {
   height: 100%;
   display: flex;
@@ -8,7 +12,7 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
-
+image{display: block}
 .box {
     display: flex;
 }
@@ -104,6 +108,9 @@
   color: #fff;
 }
 .blue-color {
+  color: #ff4338;
+}
+.red-color {
   color: #ff4338;
 }
 .fs18 {

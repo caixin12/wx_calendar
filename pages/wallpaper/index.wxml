@@ -1,4 +1,5 @@
 <!--pages/wallpaper/index.wxml-->
+
 <view class="category " bindtap='bindMenu'>
   <image src="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/category/category.png"></image>
 </view>

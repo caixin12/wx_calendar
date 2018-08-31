@@ -1,22 +1,53 @@
 /* pages/category/index.wxss */
-page{
-    background: #f7f7f7;
+
+page {
+  background: #f7f7f7;
 }
-.wallpagerlist{
+
+navigator {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  left: 7px;
+  bottom: 10px;
+}
+
+navigator image {
+  width: 24px;
+  height: 24px;
+}
+
+.wallpagerlist {
   clear: both;
   height: auto;
   overflow: hidden;
   padding: 26rpx 0 20rpx 0;
 }
-.wallpager_item{
+
+.wallpager_item {
   float: left;
   width: 338rpx;
   height: 601rpx;
-  margin: 0 0 26rpx  26rpx;
+  margin: 0 0 26rpx 26rpx;
   position: relative;
 }
-.wallpager_item image{
+
+.wallpager_item image {
   width: 100%;
-  height:100%;
+  height: 100%;
   border-radius: 5rpx;
+}
+
+.topnav {
+  background: #000;
+  height: 38px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9;
+  text-align: center;
+  line-height: 38px;
+  font-size: 18px;
+  color: #fff;
 }

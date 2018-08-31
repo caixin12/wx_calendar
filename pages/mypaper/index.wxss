@@ -16,9 +16,8 @@ page{
 }
 .set{
   position: absolute;
- 
-  top:150rpx;
-  right: 45rpx;
+ padding-top: 6px;
+  left: 45rpx;
 
 }
 .set image{
