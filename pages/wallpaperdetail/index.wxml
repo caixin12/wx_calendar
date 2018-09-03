@@ -12,33 +12,33 @@
       <view class="preview_wap">
         <image src="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/wallpaper/{{item.bigpic}}" class="bigpic" bindtap="preview_pic" mode="aspectFill"></image>
 
-        <view class='sharecon fs24' wx:if="{{item.isyuancuan==1}}">
+        <view class="sharecon fs24 {{isfixed==true?'shareFixed':''}} " style='height:{{barheight==""?"120rpx":barheight+"px"}}' wx:if="{{item.isyuancuan==1 && item.isShare==false}}">
           <view class='author'>原创作者：{{item.author}}</view>
           <view class='creatTime'>{{item.dataTime}}</view>
-          <button open-type="share" class="sharebtn" wx:if="{{item.allowDown==false}}">分享解锁下载</button>
+          <button open-type="share" class="sharebtn"  wx:if="{{item.isShare==false}}">分享解锁下载</button>
 
         </view>
 
 
-        <view wx:if="{{item.isyuancuan==0 || item.allowDown==true}}" class="des_pic fs24  {{isfixed==true?'':'Prelative'}}   ">
+        <view wx:if="{{item.isyuancuan==0 || item.isShare==true}}" style='height:{{barheight}}px' class="des_pic fs24  {{isfixed==true?'':'Prelative'}}   ">
           <view class="tabitem  ">
             <view class="iconfont eyeicon"></view>
-            <text>{{item.pre_num}}</text>浏览
+            <text>{{item.pre_num}}浏览</text>
           </view>
           <view class="tabitem btabitem" bindtap="download_pic" data-pic="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/wallpaper/{{item.bigpic}}">
             <view class="iconfont downicon"></view>
 
-            <text>{{item.down_num}}</text>下载
+            <text>{{item.down_num}}下载</text>
           </view>
 
           <view class="tabitem" bindtap="likebtn_pic" data-like='p_{{islike}}' wx:if="{{isclickLike}}">
             <view class="iconfont  {{islike ?'likedicon red-color':'likeicon' }} "></view>
 
-            <text>{{like_num}}</text>喜欢
+            <text>{{like_num}}喜欢</text>
           </view>
           <view class="tabitem" bindtap="likebtn_pic" data-like='p_{{item.islike}}' wx:else>
             <view class="iconfont   {{item.islike? 'likedicon red-color' :'likeicon' }} "></view>
-            <text>{{item.like_num}}</text>喜欢
+            <text>{{item.like_num}}喜欢</text>
           </view>
 
 

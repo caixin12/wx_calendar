@@ -19,3 +19,4 @@
     </view>
 </view>
 </view>
+<view class='iconfont topicon' bindtap='goTop' hidden='{{!floorstatus}}'></view>

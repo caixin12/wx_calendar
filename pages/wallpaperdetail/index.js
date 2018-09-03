@@ -8,8 +8,8 @@ Page({
     //是否授权登录
     hasshouquan: false,
     statusBarHeight: app.globalData.statusBarHeight,
-    isfixed: bili > 0 ? false : true
-
+    isfixed: bili > 0 ? false : true,
+    barheight: bili > 0 ? (app.globalData.screenHeight - app.globalData.screenWidth*1334/750):''
   },
   /**
    * 获取用户信息接口后的处理逻辑
@@ -367,6 +367,39 @@ Page({
       hide: ''
     })
   },
+  bindShareBtn(){
+    var that=this;
+    var url = 'https://h5.yunplus.com.cn/cases/weChatApplet/calendar/do/addShare.php';
+
+    wx.request({
+      url: url,
+      data: {
+        key: that.data.current_key,
+        openid: app.globalData.openid,
+      },
+      success: function (res) {
+        if (typeof (res.data) == 'string') {
+
+          res.data = res.data.replace(/(^\s*)|(\s*$)/g, "");
+          res.data = JSON.parse(res.data);
+        }
+        if (res.data.success) {
+
+          var items = that.data.wallpagerlist;
+          for (var ii = 0; ii < items.length; ii++) {
+            if (that.data.current_key == items[ii].key) {
+              items[ii].isShare = true;
+              that.setData({
+                wallpagerlist: items
+              });
+              break;
+            }
+          }
+
+        }
+      }
+    })
+  },
 
   //喜欢人数
   likebtn_pic: function (e) {
@@ -425,7 +458,7 @@ Page({
     return {
       title: '壁纸',
       desc: '壁纸',
-      path: 'pages/wallpaperdetail/index?key=' + that.key,
+      path: 'pages/wallpaperdetail/index?key=' + that.data.current_key,
       success: res => {
         that.setIsShare()
 
@@ -459,17 +492,10 @@ Page({
   setIsShare(){
     var that=this;
     var items = that.data.wallpagerlist;
-    items.map(function (value, index, array) {
-      // ...
-      if (value.key==that.key){
-        value.allowDown=true;
-        console.log(value)
-      }
-    });
-   
-        that.setData({
-          wallpagerlist: items
-        });
+    console.log(that.data.current_key)
+    that.bindShareBtn()
+
+    
         
   }
 

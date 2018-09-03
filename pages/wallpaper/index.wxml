@@ -25,12 +25,13 @@
 <view class="tablist fs36">
     <view class="tabitem {{type=='new'?'active':''}}" bindtap="bindTab" data-key="new">最新</view>
     <view class="tabitem {{type=='hot'?'active':''}}" bindtap="bindTab" data-key="hot">最热</view>
-    <view class="tabitem {{type=='random'?'active':''}}" bindtap="bindTab" data-key="random">随机</view>
+    <view class="tabitem {{type=='yuanchuang'?'active':''}}" bindtap="bindTab" data-key="yuanchuang">原创</view>
 </view>
 <view class="wallpagerlist {{hide}}">
     <view class="wallpager_item" wx:for="{{wallpagerlist}}" data-key="{{item.key}}" bindtap="binkDetailpic">
       <image src="https://h5.yunplus.com.cn/cases/weChatApplet/calendar/wallpaper/{{item.pic}}"></image>
 
+      <view class='iconfont yuanchuangicon '  wx:if="{{item.isyuancuan=='1'}}"></view>
       <view class="like_w" wx:if="{{type=='hot'}}">
         <image src="../../images/wbottom.png" class="link_bg"></image>
         <view class="like fs20">
@@ -41,3 +42,4 @@
     </view>
 </view>
 
+<view class='iconfont topicon' bindtap='goTop' hidden='{{!floorstatus}}'></view>

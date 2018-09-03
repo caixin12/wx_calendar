@@ -43,5 +43,6 @@
     <view class="item" bindtap="closetk">取消</view>
   </view>
 </view>
+<view class='iconfont topicon' bindtap='goTop' hidden='{{!floorstatus}}'></view>
 
    <!-- <contact-button  type="default-light" size="24" session-from="weapp" class="contact"></contact-button>-->

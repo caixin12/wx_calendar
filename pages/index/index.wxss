@@ -6,7 +6,7 @@ page{
     line-height: 108rpx;
     position: relative;
 }
-
+ad{width: 600rpx;}
 .Idate{height: 30rpx;line-height: 30rpx;margin-top: -10rpx;margin-bottom: 20rpx;}
 .date-area {
     width: 40%;
